@@ -5,7 +5,7 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	0.12.0
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 URL:		http://usefulinc.com/software/gnome-bluetooth/
@@ -41,7 +41,7 @@ Group:		Development/C
 Summary:	Static libraries and header files from %name
 Provides:	%name-devel = %version-%release
 Provides:	libgnomebt-devel = %version-%release
-Requires:	%libname = %version
+Requires:	%libname = %{epoch}:%version
 Requires:	libbtctl-devel >= 0.6
 Provides: %mklibname -d %name 0
 Obsoletes:  %mklibname -d %name 0
