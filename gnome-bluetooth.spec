@@ -1,13 +1,13 @@
-%define major	1
-%define libname %mklibname gnomebt %{major}
-%define develname %mklibname -d gnomebt
+%define major	2
+%define libname %mklibname %name %{major}
+%define develname %mklibname -d %name
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	0.12.0
-Release: %mkrel 4
-Epoch: 1
+Version: 	2.27.5
+Release: %mkrel 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
+Patch:		gnome-bluetooth-2.27.4-fix-format-string.patch
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
@@ -19,10 +19,10 @@ BuildRequires:	openobex-devel
 BuildRequires:	libglade2.0-devel libgnomeui2-devel libGConf2-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
 BuildRequires:  intltool
-BuildRequires:  pygtk2.0-devel python-gobject-devel
-Requires:	pygtk2.0-libglade
-Requires:	gnome-python gnome-python-gnomevfs python-libbtctl
-Provides:	gnome-obex-server
+Requires(post)  : desktop-file-utils
+Requires(postun): desktop-file-utils
+Requires: gvfs-obexftp
+
 
 %description
 The GNOME Bluetooth Subsystem contains a Bonobo server to control Bluetooth
@@ -54,24 +54,23 @@ Static libraries and header files from %name
 
 %prep
 %setup -q
+%patch -p1
 
 %build
-%configure2_5x --enable-shared --enable-static
+%configure2_5x --enable-shared --enable-static --disable-desktop-update \
+	       --disable-schemas-install --disable-icon-update
 %make
 										
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
-mv $RPM_BUILD_ROOT%_datadir/pixmaps/* $RPM_BUILD_ROOT%_datadir/%name/pixmaps/
 
-
-%find_lang %name
-
-%if %_lib != lib
-mv %buildroot%_prefix/lib/python* %buildroot%_libdir
-%endif
-
-rm -f %buildroot%py_platsitedir/gnomebt/*a
+%find_lang %{name}2
+%find_lang %{name} --with-gnome
+for omf in %buildroot%_datadir/omf/*/*[_-]??.omf;do 
+echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
+done
+cat %name.lang >> %{name}2.lang
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -81,18 +80,43 @@ rm -rf $RPM_BUILD_ROOT
 %postun -n %{libname} -p /sbin/ldconfig
 %endif
 
-%files -f %{name}.lang
+%define schemas bluetooth-manager
+%if %mdvver < 200900
+%post_install_gconf_schemas %schemas
+%update_icon_cache hicolor
+%update_desktop_database
+%endif
+
+%preun
+%preun_uninstall_gconf_schemas %schemas
+
+%if %mdvver < 200900
+%clean_desktop_database
+%clean_icon_cache hicolor
+%endif
+
+
+%files -f %{name}2.lang
 %defattr(-,root,root)
 %doc README AUTHORS ChangeLog
-%py_platsitedir/gnomebt
+%_sysconfdir/gconf/schemas/bluetooth-manager.schemas
+%_sysconfdir/xdg/autostart/bluetooth-applet.desktop
+%_bindir/*
+%_datadir/applications/bluetooth-properties.desktop
 %{_datadir}/%name
+%_datadir/icons/hicolor/*/apps/*
+%_mandir/man1/*
+%_datadir/icons/hicolor/*/*/*.*
+%dir %_datadir/omf/%name
+%_datadir/omf/%name/%name-C.omf
 
 %files -n %libname
 %defattr(-,root,root)
-%{_libdir}/libgnomebt.so.%{major}*
+%{_libdir}/lib%name.so.%{major}*
 
 %files -n %develname
 %defattr(-,root,root)
+%_datadir/gtk-doc/html/%name
 %{_includedir}/%name
 %{_libdir}/*.a
 %attr(644,root,root)%{_libdir}/*.la
