@@ -17,6 +17,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	gettext
 BuildRequires:	libbtctl-devel >= 0.9
 BuildRequires:	openobex-devel
+BuildRequires:	unique-devel
 BuildRequires:	libglade2.0-devel libgnomeui2-devel libGConf2-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
 BuildRequires:  intltool
