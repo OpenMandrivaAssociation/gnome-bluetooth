@@ -20,6 +20,7 @@ BuildRequires:	openobex-devel
 BuildRequires:	unique-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libGConf2-devel
+BuildRequires:	hal-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
 BuildRequires:  intltool
 Requires(post)  : desktop-file-utils
