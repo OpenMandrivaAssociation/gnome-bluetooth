@@ -6,6 +6,7 @@ Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	2.27.5
 Release: %mkrel 1
+Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 Patch:		gnome-bluetooth-2.27.4-fix-format-string.patch
 URL:		http://usefulinc.com/software/gnome-bluetooth/
