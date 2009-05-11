@@ -18,6 +18,7 @@ BuildRequires:	gettext
 BuildRequires:	libbtctl-devel >= 0.9
 BuildRequires:	openobex-devel
 BuildRequires:	unique-devel
+BuildRequires:	libnotify-devel
 BuildRequires:	libGConf2-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
 BuildRequires:  intltool
