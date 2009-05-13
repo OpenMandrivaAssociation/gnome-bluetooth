@@ -5,7 +5,7 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	2.27.5
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 Patch:		gnome-bluetooth-2.27.4-fix-format-string.patch
@@ -27,6 +27,15 @@ BuildRequires:  gnome-doc-utils
 Requires(post)  : desktop-file-utils
 Requires(postun): desktop-file-utils
 Requires: gvfs-obexftp
+Requires: bluez
+#gw not packaged yet:
+#Requires: obexd
+Provides: bluez-pin
+Provides: bluez-gnome
+Obsoletes: bluez-gnome
+Provides: bluez-gnome-analyzer
+Obsoletes: bluez-gnome-analyzer
+
 
 
 %description
