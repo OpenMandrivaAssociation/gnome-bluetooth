@@ -1,14 +1,13 @@
-%define major	2
+%define major	6
 %define libname %mklibname %name %{major}
 %define develname %mklibname -d %name
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.27.5
-Release: %mkrel 2
+Version: 	2.27.6
+Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
-Patch:		gnome-bluetooth-2.27.4-fix-format-string.patch
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
@@ -68,7 +67,6 @@ Static libraries and header files from %name
 
 %prep
 %setup -q
-%patch -p1
 
 %build
 %configure2_5x --enable-shared --enable-static --disable-desktop-update \
@@ -118,7 +116,6 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/*
 %_datadir/applications/bluetooth-properties.desktop
 %{_datadir}/%name
-%_datadir/icons/hicolor/*/apps/*
 %_mandir/man1/*
 %_datadir/icons/hicolor/*/*/*.*
 %dir %_datadir/omf/%name
