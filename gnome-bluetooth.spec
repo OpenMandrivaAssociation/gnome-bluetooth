@@ -4,7 +4,7 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.27.6
+Version: 	2.27.7.1
 Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
@@ -69,7 +69,7 @@ Static libraries and header files from %name
 %setup -q
 
 %build
-%configure2_5x --enable-shared --enable-static --disable-desktop-update \
+%configure2_5x --enable-shared --disable-static --disable-desktop-update \
 	       --disable-schemas-install --disable-icon-update
 %make
 										
@@ -120,6 +120,9 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/icons/hicolor/*/*/*.*
 %dir %_datadir/omf/%name
 %_datadir/omf/%name/%name-C.omf
+%dir %_libdir/%name
+%dir %_libdir/%name/plugins
+%_libdir/%name/plugins/libgbtgeoclue.*
 
 %files -n %libname
 %defattr(-,root,root)
@@ -129,7 +132,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_datadir/gtk-doc/html/%name
 %{_includedir}/%name
-%{_libdir}/*.a
 %attr(644,root,root)%{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
