@@ -1,10 +1,10 @@
-%define major	6
+%define major	7
 %define libname %mklibname %name %{major}
 %define develname %mklibname -d %name
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.27.7.1
+Version: 	2.27.8
 Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
@@ -21,6 +21,8 @@ BuildRequires:	libnotify-devel
 BuildRequires:	libGConf2-devel
 BuildRequires:	hal-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
+#gw does not build: http://bugzilla.gnome.org/show_bug.cgi?id=589280
+#BuildRequires:  gobject-introspection-devel gir-repository
 BuildRequires:  intltool
 BuildRequires:  gnome-doc-utils
 Requires(post)  : desktop-file-utils
