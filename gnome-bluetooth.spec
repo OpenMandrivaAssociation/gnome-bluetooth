@@ -5,9 +5,11 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	2.27.8
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
+#gw missing file: http://bugzilla.gnome.org/show_bug.cgi?id=589280
+Source1: DBusGLib-1.0.gir
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
@@ -21,8 +23,7 @@ BuildRequires:	libnotify-devel
 BuildRequires:	libGConf2-devel
 BuildRequires:	hal-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
-#gw does not build: http://bugzilla.gnome.org/show_bug.cgi?id=589280
-#BuildRequires:  gobject-introspection-devel gir-repository
+BuildRequires:  gobject-introspection-devel gir-repository
 BuildRequires:  intltool
 BuildRequires:  gnome-doc-utils
 Requires(post)  : desktop-file-utils
@@ -69,6 +70,7 @@ Static libraries and header files from %name
 
 %prep
 %setup -q
+cp %SOURCE1 lib
 
 %build
 %configure2_5x --enable-shared --disable-static --disable-desktop-update \
@@ -77,7 +79,7 @@ Static libraries and header files from %name
 										
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall_std
+%makeinstall_std GIRDIR=%_datadir/gir-1.0 TYPELIBDIR=%_libdir/girepository-1.0
 
 %find_lang %{name}2
 %find_lang %{name} --with-gnome
@@ -137,5 +139,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root)%{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
-
-
+%_datadir/gir-1.0/GnomeBluetooth-1.0.gir
+%_libdir/girepository-1.0/GnomeBluetooth-1.0.typelib
