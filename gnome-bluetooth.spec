@@ -4,8 +4,8 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.27.8
-Release: %mkrel 2
+Version: 	2.27.9
+Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 #gw missing file: http://bugzilla.gnome.org/show_bug.cgi?id=589280
