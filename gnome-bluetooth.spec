@@ -5,11 +5,12 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	2.27.9
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 #gw missing file: http://bugzilla.gnome.org/show_bug.cgi?id=589280
 Source1: DBusGLib-1.0.gir
+Patch: gnome-bluetooth-2.27.9-duplicate-uis.patch
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
@@ -69,6 +70,7 @@ Static libraries and header files from %name
 
 %prep
 %setup -q
+%patch -p1
 cp %SOURCE1 lib
 
 %build
