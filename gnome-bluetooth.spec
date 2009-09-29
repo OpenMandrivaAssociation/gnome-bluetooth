@@ -4,7 +4,7 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.28.0
+Version: 	2.28.1
 Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
@@ -74,7 +74,7 @@ cp %SOURCE1 lib
 %build
 %configure2_5x --enable-shared --disable-static --disable-desktop-update \
 	       --disable-schemas-install --disable-icon-update
-%make
+make
 										
 %install
 rm -rf $RPM_BUILD_ROOT
