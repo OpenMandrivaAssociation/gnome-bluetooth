@@ -4,7 +4,7 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.28.3
+Version: 	2.29.3
 Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
@@ -23,6 +23,7 @@ BuildRequires:	libnotify-devel
 BuildRequires:	libGConf2-devel
 BuildRequires:	hal-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
+BuildRequires:	nautilus-sendto-devel
 BuildRequires:  gobject-introspection-devel gir-repository
 BuildRequires:  intltool
 BuildRequires:  gnome-doc-utils
@@ -67,6 +68,18 @@ Obsoletes:  %mklibname -d %name 1
 %description -n %develname
 Static libraries and header files from %name
 
+%package -n nautilus-sendto-bluetooth
+Summary: Send files from nautilus to bluetooth
+Group: Graphical desktop/GNOME
+Requires: nautilus-sendto
+Requires: %name
+
+%description -n nautilus-sendto-bluetooth
+This application provides integration between nautilus and bluetooth.
+It adds a Nautilus context menu component ("Send To...") and features
+a dialog for insert the bluetooth device which you want to send the
+file/files.
+
 %prep
 %setup -q
 cp %SOURCE1 lib
@@ -86,6 +99,8 @@ for omf in %buildroot%_datadir/omf/*/*[_-]??.omf;do
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
 cat %name.lang >> %{name}2.lang
+
+rm -f %buildroot%_libdir/nautilus-sendto/plugins/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -140,3 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
 %_datadir/gir-1.0/GnomeBluetooth-1.0.gir
+
+%files -n nautilus-sendto-bluetooth
+%defattr(-,root,root)
+%_libdir/nautilus-sendto/plugins/libnstbluetooth.so
