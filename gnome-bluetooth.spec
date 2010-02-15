@@ -40,9 +40,8 @@ Obsoletes: bluez-gnome-analyzer
 
 
 %description
-The GNOME Bluetooth Subsystem contains a Bonobo server to control Bluetooth
-devices, and a simple GUI to explore which devices are available
-(gnome-bluetooth-admin).
+The gnome-bluetooth package contains graphical utilities to setup,
+monitor and use Bluetooth devices.
 
 %package -n %libname
 Group:		System/Libraries
