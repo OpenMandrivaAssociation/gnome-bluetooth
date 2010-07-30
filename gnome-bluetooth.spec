@@ -5,7 +5,7 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	2.30.0
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 URL:		http://usefulinc.com/software/gnome-bluetooth/
@@ -22,8 +22,9 @@ BuildRequires:	libGConf2-devel
 BuildRequires:	hal-devel
 BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
 BuildRequires:	nautilus-sendto-devel
-BuildRequires:  gobject-introspection-devel 
-BuildRequires:  gir-repository >= 0.6.5-4
+BuildRequires:  gobject-introspection-devel
+# for DBusGLib-1.0.gir
+BuildRequires:	gir-repository >= 0.6.5-4 
 BuildRequires:  intltool
 BuildRequires:  gnome-doc-utils
 Requires(post)  : desktop-file-utils
@@ -36,8 +37,6 @@ Provides: bluez-gnome
 Obsoletes: bluez-gnome
 Provides: bluez-gnome-analyzer
 Obsoletes: bluez-gnome-analyzer
-
-
 
 %description
 The gnome-bluetooth package contains graphical utilities to setup,
@@ -61,7 +60,6 @@ Provides: %mklibname -d %name 0
 Obsoletes:  %mklibname -d %name 0
 Provides: %mklibname -d %name 1
 Obsoletes:  %mklibname -d %name 1
-
 
 %description -n %develname
 Static libraries and header files from %name
