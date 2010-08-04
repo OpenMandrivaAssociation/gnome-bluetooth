@@ -1,11 +1,11 @@
-%define major	7
+%define major	8
 %define libname %mklibname %name %{major}
 %define develname %mklibname -d %name
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	2.30.0
-Release: %mkrel 2
+Version: 	2.31.6
+Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 URL:		http://usefulinc.com/software/gnome-bluetooth/
@@ -13,6 +13,8 @@ URL:		http://usefulinc.com/software/gnome-bluetooth/
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRequires:	glib2-devel >= 2.25.7
+BuildRequires:	gtk+2-devel
 BuildRequires:	gettext
 BuildRequires:	libbtctl-devel >= 0.9
 BuildRequires:	openobex-devel
@@ -81,7 +83,7 @@ file/files.
 
 %build
 %configure2_5x --enable-shared --disable-static --disable-desktop-update \
-	       --disable-schemas-install --disable-icon-update
+	       --disable-icon-update
 make
 										
 %install
@@ -100,31 +102,10 @@ rm -f %buildroot%_libdir/nautilus-sendto/plugins/*.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%define schemas bluetooth-manager
-%if %mdvver < 200900
-%post_install_gconf_schemas %schemas
-%update_icon_cache hicolor
-%update_desktop_database
-%endif
-
-%preun
-%preun_uninstall_gconf_schemas %schemas
-
-%if %mdvver < 200900
-%clean_desktop_database
-%clean_icon_cache hicolor
-%endif
-
 
 %files -f %{name}2.lang
 %defattr(-,root,root)
 %doc README AUTHORS
-%_sysconfdir/gconf/schemas/bluetooth-manager.schemas
 %_sysconfdir/xdg/autostart/bluetooth-applet.desktop
 %_bindir/*
 %_datadir/applications/bluetooth-properties.desktop
@@ -136,6 +117,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %_libdir/%name
 %dir %_libdir/%name/plugins
 %_libdir/%name/plugins/libgbtgeoclue.*
+%_datadir/GConf/gsettings/gnome-bluetooth
+%_datadir/glib-2.0/schemas/org.gnome.Bluetooth.gschema.xml
 
 %files -n %libname
 %defattr(-,root,root)
@@ -154,3 +137,5 @@ rm -rf $RPM_BUILD_ROOT
 %files -n nautilus-sendto-bluetooth
 %defattr(-,root,root)
 %_libdir/nautilus-sendto/plugins/libnstbluetooth.so
+%_datadir/GConf/gsettings/gnome-bluetooth-nst
+%_datadir/glib-2.0/schemas/org.gnome.Bluetooth.nst.gschema.xml
