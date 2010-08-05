@@ -5,7 +5,7 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version: 	2.31.6
-Release: %mkrel 1
+Release: %mkrel 2
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
 URL:		http://usefulinc.com/software/gnome-bluetooth/
@@ -47,6 +47,7 @@ monitor and use Bluetooth devices.
 %package -n %libname
 Group:		System/Libraries
 Summary: 	GNOME bluetooth library
+Conflicts:	%{_lib}gnome-bluetooth7 < 1:2.31
 
 %description -n %libname
 Library from GNOME-Bluetooth.
