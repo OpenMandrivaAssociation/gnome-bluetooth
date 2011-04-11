@@ -8,6 +8,8 @@ Version: 	2.32.0
 Release: %mkrel 1
 Epoch: 1
 Source:		http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.bz2
+Patch0:		gnome-bluetooth-2.32.0-new-gi.patch
+Patch1:		gnome-bluetooth-2.32.0-libnotify0.7.patch
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
@@ -16,21 +18,17 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 BuildRequires:	glib2-devel >= 2.25.7
 BuildRequires:	gtk+2-devel
 BuildRequires:	gettext
-BuildRequires:	libbtctl-devel >= 0.9
-BuildRequires:	openobex-devel
 BuildRequires:	unique-devel
 BuildRequires:	libnotify-devel
-BuildRequires:	libGConf2-devel
-BuildRequires:	hal-devel
-BuildRequires:	bluez-devel bluez-sdp-devel gob2 librsvg-devel
+BuildRequires:	dbus-glib-devel
+BuildRequires:	libGConf2-devel GConf2
 BuildRequires:	nautilus-sendto-devel
 BuildRequires:  gobject-introspection-devel
 # for DBusGLib-1.0.gir
 BuildRequires:	gir-repository >= 0.6.5-4 
 BuildRequires:  intltool
-BuildRequires:  gnome-doc-utils
-Requires(post)  : desktop-file-utils
-Requires(postun): desktop-file-utils
+BuildRequires:  gnome-doc-utils gtk-doc
+BuildRequires:	gnome-common
 Requires: gvfs-obexftp
 Requires: bluez
 Requires: obexd
@@ -81,18 +79,20 @@ file/files.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p0
 
 %build
+NOCONFIGURE=yes gnome-autogen.sh
 %configure2_5x --enable-shared --disable-static --disable-desktop-update \
 	       --disable-icon-update
-make
+%make
 										
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall_std GIRDIR=%_datadir/gir-1.0 TYPELIBDIR=%_libdir/girepository-1.0
+%makeinstall_std
 
-%find_lang %{name}2
-%find_lang %{name} --with-gnome
+%find_lang %{name}2 --all-name --with-gnome
 for omf in %buildroot%_datadir/omf/*/*[_-]??.omf;do 
 echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%buildroot!!)" >> %name.lang
 done
