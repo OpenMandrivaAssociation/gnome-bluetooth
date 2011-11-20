@@ -100,6 +100,9 @@ cat %name.lang >> %{name}2.lang
 
 rm -f %buildroot%_libdir/nautilus-sendto/plugins/*.la
 
+# remove some quite annoying /usr/usr
+perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
