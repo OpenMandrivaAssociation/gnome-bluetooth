@@ -89,7 +89,7 @@ NOCONFIGURE=yes gnome-autogen.sh
 %make
 										
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
 %find_lang %{name}2 --all-name --with-gnome
@@ -104,7 +104,7 @@ rm -f %buildroot%_libdir/nautilus-sendto/plugins/*.la
 perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 
 %files -f %{name}2.lang
