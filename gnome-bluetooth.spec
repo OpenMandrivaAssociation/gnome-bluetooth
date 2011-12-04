@@ -59,7 +59,7 @@ Library from GNOME-Bluetooth Applet
 %package -n %{girname}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name}
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
 
 %description -n %{girname}
 GObject Introspection interface for %{name}.
@@ -67,7 +67,7 @@ GObject Introspection interface for %{name}.
 %package -n %{girapplet}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name} applet
-Requires:	%{libapplet} = %{version}-%{release}
+Requires:	%{libapplet} = %{EVRD}
 
 %description -n %{girapplet}
 GObject Introspection interface for %{name} applet. 
@@ -75,8 +75,8 @@ GObject Introspection interface for %{name} applet.
 %package -n %{develname}
 Group:		Development/C
 Summary:	Development libraries and header files from %{name}
-Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libapplet} = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
+Requires:	%{libapplet} = %{EVRD}
 Provides:	%{name}-devel = %{version}-%{release}
 
 
