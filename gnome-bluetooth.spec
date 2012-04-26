@@ -1,4 +1,4 @@
-%define major	8
+%define major	10
 %define major_applet	0
 %define gir_major	1.0
 %define libname		%mklibname %{name} %{major}
@@ -10,8 +10,8 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
-Version: 	3.2.1
-Release:	1
+Version: 	3.4.0
+Release:	0
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -114,10 +114,10 @@ rm -rf %{buildroot}
 find %buildroot -name *.la | xargs rm
 %find_lang %{name}2 --all-name --with-gnome
 
-for omf in %{buildroot}%{_datadir}/omf/*/*[_-]??.omf;do 
-echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%{buildroot}!!)" >> %{name}.lang
-done
-cat %{name}.lang >> %{name}2.lang
+#for omf in %{buildroot}%{_datadir}/omf/*/*[_-]??.omf;do 
+#echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%{buildroot}!!)" >> %{name}.lang
+#done
+#cat %{name}.lang >> %{name}2.lang
 
 # remove some quite annoying /usr/usr
 perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
@@ -126,17 +126,13 @@ perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %doc README AUTHORS
 %{_sysconfdir}/xdg/autostart/bluetooth-applet.desktop
 %{_bindir}/*
-%{_datadir}/applications/bluetooth-properties.desktop
 %{_datadir}/applications/bluetooth-sendto.desktop
 %{_datadir}/applications/bluetooth-wizard.desktop
 %{_datadir}/icons/hicolor/*/*/*.*
 %{_datadir}/%{name}
-%dir %{_datadir}/omf/%{name}
-%{_datadir}/omf/%{name}/%{name}-C.omf
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %{_libdir}/%{name}/plugins/libgbtgeoclue.*
-%{_libdir}/control-center-1/panels/libbluetooth.so
 %{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so
 %{_mandir}/man1/*
 
