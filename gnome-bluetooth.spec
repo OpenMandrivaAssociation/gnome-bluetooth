@@ -11,7 +11,7 @@ Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
 Version: 	3.4.0
-Release:	0
+Release:	1
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -114,11 +114,6 @@ rm -rf %{buildroot}
 find %buildroot -name *.la | xargs rm
 %find_lang %{name}2 --all-name --with-gnome
 
-#for omf in %{buildroot}%{_datadir}/omf/*/*[_-]??.omf;do 
-#echo "%lang($(basename $omf|sed -e s/.*-// -e s/.omf//)) $(echo $omf|sed -e s!%{buildroot}!!)" >> %{name}.lang
-#done
-#cat %{name}.lang >> %{name}2.lang
-
 # remove some quite annoying /usr/usr
 perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 
@@ -133,7 +128,6 @@ perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %{_libdir}/%{name}/plugins/libgbtgeoclue.*
-%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so
 %{_mandir}/man1/*
 
 %files -n %{libname}
@@ -152,6 +146,7 @@ perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %{_datadir}/gtk-doc/html/%{name}
 %{_includedir}/%{name}
 %{_libdir}/*.so
+%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so
 %{_libdir}/pkgconfig/*.pc
 %{_datadir}/gir-1.0/GnomeBluetooth-1.0.gir
 
@@ -159,3 +154,4 @@ perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %{_libdir}/nautilus-sendto/plugins/libnstbluetooth.so
 %{_datadir}/GConf/gsettings/gnome-bluetooth-nst
 %{_datadir}/glib-2.0/schemas/org.gnome.Bluetooth.nst.gschema.xml
+
