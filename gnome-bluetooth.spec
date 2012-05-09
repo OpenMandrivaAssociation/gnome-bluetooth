@@ -1,11 +1,11 @@
-%define major	10
-%define major_applet	0
-%define gir_major	1.0
-%define libname		%mklibname %{name} %{major}
-%define libapplet	%mklibname %{name}-applet %{major_applet}
-%define girname		%mklibname %{name}-gir %{gir_major}
-%define girapplet	%mklibname %{name}-applet-gir %{gir_major}
-%define develname	%mklibname -d %{name}
+%define	major	10
+%define	maj_app	0
+%define	gir_maj	1.0
+%define	libname	%mklibname %{name} %{major}
+%define	lib_app	%mklibname %{name}-applet %{maj_app}
+%define	girname	%mklibname %{name}-gir %{gir_maj}
+%define	gir_app	%mklibname %{name}-applet-gir %{gir_maj}
+%define	devname	%mklibname -d %{name}
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
@@ -33,61 +33,61 @@ BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	pkgconfig(nautilus-sendto)
 BuildRequires:  pkgconfig(gobject-introspection-1.0)
 
-Requires: gvfs-obexftp
-Requires: bluez
-Requires: obexd
+Requires:	gvfs-obexftp
+Requires:	bluez
+Requires:	obexd
 
 %description
 The gnome-bluetooth package contains graphical utilities to setup,
 monitor and use Bluetooth devices.
 
-%package -n %{libname}
+%package -n	%{libname}
 Group:		System/Libraries
 Summary: 	GNOME bluetooth library
 Conflicts:	%{_lib}gnome-bluetooth7 < 1:2.31
 
-%description -n %{libname}
+%description -n	%{libname}
 Library from GNOME-Bluetooth.
 
-%package -n %{libapplet}
+%package -n	%{lib_app}
 Group:		System/Libraries
 Summary: 	GNOME bluetooth Applet library
 
-%description -n %{libapplet}
+%description -n %{lib_app}
 Library from GNOME-Bluetooth Applet
 
-%package -n %{girname}
+%package -n	%{girname}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name}
 Requires:	%{libname} = %{EVRD}
 
-%description -n %{girname}
+%description -n	%{girname}
 GObject Introspection interface for %{name}.
 
-%package -n %{girapplet}
+%package -n	%{gir_app}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name} applet
-Requires:	%{libapplet} = %{EVRD}
+Requires:	%{lib_app} = %{EVRD}
 
-%description -n %{girapplet}
+%description -n	%{gir_app}
 GObject Introspection interface for %{name} applet. 
 
-%package -n %{develname}
+%package -n	%{devname}
 Group:		Development/C
 Summary:	Development libraries and header files from %{name}
 Requires:	%{libname} = %{EVRD}
-Requires:	%{libapplet} = %{EVRD}
+Requires:	%{lib_app} = %{EVRD}
 Provides:	%{name}-devel = %{version}-%{release}
 
 
-%description -n %{develname}
+%description -n	%{devname}
 Development libraries and header files from %{name}
 
-%package -n nautilus-sendto-bluetooth
-Summary: Send files from nautilus to bluetooth
-Group: Graphical desktop/GNOME
-Requires: nautilus-sendto
-Requires: %{name} = %{EVRD}
+%package -n	nautilus-sendto-bluetooth
+Summary:	Send files from nautilus to bluetooth
+Group:		Graphical desktop/GNOME
+Requires:	nautilus-sendto
+Requires:	%{name} = %{EVRD}
 
 %description -n nautilus-sendto-bluetooth
 This application provides integration between nautilus and bluetooth.
@@ -109,13 +109,8 @@ file/files.
 %make
 										
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-find %buildroot -name *.la | xargs rm
 %find_lang %{name}2 --all-name --with-gnome
-
-# remove some quite annoying /usr/usr
-perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 
 %files -f %{name}2.lang
 %doc README AUTHORS
@@ -133,16 +128,16 @@ perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
 
-%files -n %{libapplet}
-%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so.%{major_applet}*
+%files -n %{lib_app}
+%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so.%{maj_app}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/GnomeBluetooth-%{gir_major}.typelib
+%{_libdir}/girepository-1.0/GnomeBluetooth-%{gir_maj}.typelib
 
-%files -n %{girapplet}
-%{_libdir}/gnome-bluetooth/GnomeBluetoothApplet-%{gir_major}.typelib
+%files -n %{gir_app}
+%{_libdir}/gnome-bluetooth/GnomeBluetoothApplet-%{gir_maj}.typelib
 
-%files -n %{develname}
+%files -n %{devname}
 %{_datadir}/gtk-doc/html/%{name}
 %{_includedir}/%{name}
 %{_libdir}/*.so
@@ -154,4 +149,3 @@ perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 %{_libdir}/nautilus-sendto/plugins/libnstbluetooth.so
 %{_datadir}/GConf/gsettings/gnome-bluetooth-nst
 %{_datadir}/glib-2.0/schemas/org.gnome.Bluetooth.nst.gschema.xml
-
