@@ -11,7 +11,7 @@ Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
 Version: 	3.4.0
-Release:	1
+Release:	2
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
@@ -87,7 +87,7 @@ Development libraries and header files from %{name}
 Summary: Send files from nautilus to bluetooth
 Group: Graphical desktop/GNOME
 Requires: nautilus-sendto
-Requires: %{name} = %{version}-%{release}
+Requires: %{name} = %{EVRD}
 
 %description -n nautilus-sendto-bluetooth
 This application provides integration between nautilus and bluetooth.
