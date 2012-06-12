@@ -18,20 +18,20 @@ Group:		Graphical desktop/GNOME
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.xz
 
-BuildRequires:  intltool
+BuildRequires:	intltool
 BuildRequires:	GConf2
 BuildRequires:	gettext
-BuildRequires:  gnome-doc-utils
 BuildRequires:	gnome-common
 BuildRequires:	gtk-doc
-BuildRequires:	pkgconfig(glib-2.0) >= 2.25.7
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gnome-doc-utils)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(unique-3.0)
 BuildRequires:	pkgconfig(libnotify)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	pkgconfig(nautilus-sendto)
-BuildRequires:  pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
 
 Requires:	gvfs-obexftp
 Requires:	bluez
