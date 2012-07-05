@@ -10,7 +10,7 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
-Version: 	3.4.1
+Version: 	3.4.2
 Release:	1
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
