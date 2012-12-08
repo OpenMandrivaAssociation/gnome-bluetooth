@@ -1,4 +1,4 @@
-%define	major	10
+%define	major	11
 %define	maj_app	0
 %define	gir_maj	1.0
 %define	libname	%mklibname %{name} %{major}
@@ -10,15 +10,15 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
-Version: 	3.4.2
+Version: 	3.6.1
 Release:	1
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://usefulinc.com/software/gnome-bluetooth/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.6/%{name}-%{version}.tar.xz
 
-BuildRequires:	intltool
+BuildRequires:	intltool itstool
 BuildRequires:	GConf2
 BuildRequires:	gettext
 BuildRequires:	gnome-common
