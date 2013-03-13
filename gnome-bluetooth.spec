@@ -11,12 +11,13 @@ Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
 Version: 	3.6.1
-Release:	1
+Release:	2
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.6/%{name}-%{version}.tar.xz
+Source1:	61-gnome-bluetooth-rfkill.rules
 
 BuildRequires:	intltool itstool
 BuildRequires:	GConf2
@@ -112,6 +113,9 @@ file/files.
 %makeinstall_std
 %find_lang %{name}2 --all-name --with-gnome
 
+mkdir -p %{buildroot}/lib/udev/rules.d
+install -m644 %{SOURCE1} %{buildroot}/lib/udev/rules.d/
+
 %files -f %{name}2.lang
 %doc README AUTHORS
 %{_sysconfdir}/xdg/autostart/bluetooth-applet.desktop
@@ -124,6 +128,7 @@ file/files.
 %dir %{_libdir}/%{name}/plugins
 %{_libdir}/%{name}/plugins/libgbtgeoclue.*
 %{_mandir}/man1/*
+/lib/udev/rules.d/*
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
