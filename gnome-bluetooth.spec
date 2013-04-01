@@ -6,12 +6,13 @@
 %define	girname	%mklibname %{name}-gir %{gir_maj}
 %define	gir_app	%mklibname %{name}-applet-gir %{gir_maj}
 %define	devname	%mklibname -d %{name}
+%define _disable_ld_no_undefined 1
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Epoch:		1
 Version: 	3.6.1
-Release:	2
+Release:	3
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
