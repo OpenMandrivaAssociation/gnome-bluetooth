@@ -1,3 +1,6 @@
+%define _disable_ld_no_undefined 1
+%define url_ver %(echo %{version}|cut -d. -f1,2)
+
 %define	major	11
 %define	maj_app	0
 %define	gir_maj	1.0
@@ -6,18 +9,17 @@
 %define	girname	%mklibname %{name}-gir %{gir_maj}
 %define	gir_app	%mklibname %{name}-applet-gir %{gir_maj}
 %define	devname	%mklibname -d %{name}
-%define _disable_ld_no_undefined 1
 
-Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
+Name: 	 	gnome-bluetooth
 Epoch:		1
 Version: 	3.6.1
 Release:	3
 #gw lib is LGPL, main app is GPL
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
-URL:		http://usefulinc.com/software/gnome-bluetooth/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/3.6/%{name}-%{version}.tar.xz
+Url:		http://usefulinc.com/software/gnome-bluetooth/
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-bluetooth/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
 
 BuildRequires:	intltool itstool
@@ -81,7 +83,6 @@ Requires:	%{libname} = %{EVRD}
 Requires:	%{lib_app} = %{EVRD}
 Provides:	%{name}-devel = %{version}-%{release}
 
-
 %description -n	%{devname}
 Development libraries and header files from %{name}
 
@@ -123,8 +124,8 @@ install -m644 %{SOURCE1} %{buildroot}/lib/udev/rules.d/
 %{_bindir}/*
 %{_datadir}/applications/bluetooth-sendto.desktop
 %{_datadir}/applications/bluetooth-wizard.desktop
-%{_datadir}/icons/hicolor/*/*/*.*
 %{_datadir}/%{name}
+%{_iconsdir}/hicolor/*/*/*.*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %{_libdir}/%{name}/plugins/libgbtgeoclue.*
@@ -155,3 +156,4 @@ install -m644 %{SOURCE1} %{buildroot}/lib/udev/rules.d/
 %{_libdir}/nautilus-sendto/plugins/libnstbluetooth.so
 %{_datadir}/GConf/gsettings/gnome-bluetooth-nst
 %{_datadir}/glib-2.0/schemas/org.gnome.Bluetooth.nst.gschema.xml
+
