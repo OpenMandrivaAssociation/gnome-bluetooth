@@ -5,17 +5,16 @@
 %define	maj_app	0
 %define	gir_maj	1.0
 %define	libname	%mklibname %{name} %{major}
-%define	lib_app	%mklibname %{name}-applet %{maj_app}
+%define	libapp	%mklibname %{name}-applet %{maj_app}
 %define	girname	%mklibname %{name}-gir %{gir_maj}
-%define	gir_app	%mklibname %{name}-applet-gir %{gir_maj}
+%define	girapp	%mklibname %{name}-applet-gir %{gir_maj}
 %define	devname	%mklibname -d %{name}
 
 Summary: 	GNOME Bluetooth Subsystem
 Name: 	 	gnome-bluetooth
 Epoch:		1
 Version: 	3.6.1
-Release:	3
-#gw lib is LGPL, main app is GPL
+Release:	4
 License:	GPLv2+ and LGPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://usefulinc.com/software/gnome-bluetooth/
@@ -53,34 +52,34 @@ Conflicts:	%{_lib}gnome-bluetooth7 < 1:2.31
 %description -n	%{libname}
 Library from GNOME-Bluetooth.
 
-%package -n	%{lib_app}
+%package -n	%{libapp}
 Group:		System/Libraries
 Summary: 	GNOME bluetooth Applet library
 
-%description -n %{lib_app}
+%description -n %{libapp}
 Library from GNOME-Bluetooth Applet
 
 %package -n	%{girname}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name}
-Requires:	%{libname} = %{EVRD}
 
 %description -n	%{girname}
 GObject Introspection interface for %{name}.
 
-%package -n	%{gir_app}
+%package -n	%{girapp}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name} applet
-Requires:	%{lib_app} = %{EVRD}
 
-%description -n	%{gir_app}
+%description -n	%{girapp}
 GObject Introspection interface for %{name} applet. 
 
 %package -n	%{devname}
 Group:		Development/C
 Summary:	Development libraries and header files from %{name}
 Requires:	%{libname} = %{EVRD}
-Requires:	%{lib_app} = %{EVRD}
+Requires:	%{libapp} = %{EVRD}
+Requires:	%{girname} = %{EVRD}
+Requires:	%{girapp} = %{EVRD}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n	%{devname}
@@ -135,13 +134,13 @@ install -m644 %{SOURCE1} %{buildroot}/lib/udev/rules.d/
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
 
-%files -n %{lib_app}
+%files -n %{libapp}
 %{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so.%{maj_app}*
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gir_maj}.typelib
 
-%files -n %{gir_app}
+%files -n %{girapp}
 %{_libdir}/gnome-bluetooth/GnomeBluetoothApplet-%{gir_maj}.typelib
 
 %files -n %{devname}
