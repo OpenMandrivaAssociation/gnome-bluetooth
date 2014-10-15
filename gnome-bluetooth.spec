@@ -1,20 +1,17 @@
-%define major		11
-%define major_applet	0
+%define major		13
 %define gi_major	1.0
 
 %define libname		%mklibname %{name} %{major}
-%define libnameapplet	%mklibname %{name}-applet %{major_applet}
 %define develname	%mklibname -d %{name}
 %define girname		%mklibname %{name}-gir %{gi_major}
-%define girnameapplet	%mklibname %{name}-applet-gir %{gi_major}
 
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define _disable_ld_no_undefined 1
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	3.8.1
-Release: 	7
+Version: 	3.14.0
+Release: 	1
 Epoch:		1
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
@@ -54,21 +51,6 @@ Conflicts:	%{_lib}gnome-bluetooth7 < 1:2.31
 %description -n %{libname}
 Library from GNOME-Bluetooth.
 
-%package -n %{libnameapplet}
-Group:		System/Libraries
-Summary: 	GNOME bluetooth Applet library
-
-%description -n %{libnameapplet}
-Library from GNOME-Bluetooth Applet
-
-%package -n %{girnameapplet}
-Group:		System/Libraries
-Summary:	GObject Introspection interface for %{name} applet
-Requires:	%{libnameapplet} = %{epoch}:%{version}-%{release}
-
-%description -n %{girnameapplet}
-GObject Introspection interface for %{name} applet. 
-
 %package -n %{girname}
 Group:		System/Libraries
 Summary:	GObject Introspection interface for %{name}
@@ -84,7 +66,6 @@ Provides:	lib%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	libgnomebt-devel = %{epoch}:%{version}-%{release}
 Requires:	%{libname} = %{epoch}:%{version}-%{release}
-Requires:	%{libnameapplet} = %{epoch}:%{version}-%{release}
 
 %description -n %{develname}
 Development files and header files from %{name}.
@@ -93,7 +74,7 @@ Development files and header files from %{name}.
 %setup -q
 
 %build
-%configure2_5x \
+%configure \
 	--enable-shared \
 	--disable-static \
 	--disable-desktop-update \
@@ -117,20 +98,12 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 %{_udevrulesdir}/61-gnome-bluetooth-rfkill.rules
 %{_bindir}/*
 %{_datadir}/applications/bluetooth-sendto.desktop
-%{_datadir}/applications/bluetooth-wizard.desktop
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 %{_datadir}/icons/hicolor/*/*/*.*
-%{_libdir}/%{name}/plugins/libgbtgeoclue.*
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
-
-%files -n %{libnameapplet}
-%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so.%{major_applet}*
-
-%files -n %{girnameapplet}
-%{_libdir}/gnome-bluetooth/GnomeBluetoothApplet-%{gi_major}.typelib
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gi_major}.typelib
@@ -139,7 +112,6 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 %doc %{_datadir}/gtk-doc/html/%{name}
 %{_includedir}/%{name}
 %{_libdir}/lib%{name}.so
-%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so
 %{_datadir}/gir-1.0/GnomeBluetooth-%{gi_major}.gir
 %{_libdir}/pkgconfig/*.pc
 
