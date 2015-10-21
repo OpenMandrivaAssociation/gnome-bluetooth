@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(libnotify) >= 0.7.0
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xi)
+BuildRequires:	pkgconfig(libcanberra-gtk3)
 BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	intltool
