@@ -111,7 +111,7 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gi_major}.typelib
 
 %files -n %{develname}
-%doc %{_datadir}/gtk-doc/html/%{name}
+#doc %{_datadir}/gtk-doc/html/%{name}
 %{_includedir}/%{name}
 %{_libdir}/lib%{name}.so
 %{_datadir}/gir-1.0/GnomeBluetooth-%{gi_major}.gir
