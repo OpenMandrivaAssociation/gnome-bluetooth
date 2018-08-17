@@ -84,9 +84,6 @@ Development files and header files from %{name}.
 	
 %meson_build
 
-	
-%make
-
 %install
 %meson_install
 
