@@ -36,6 +36,8 @@ BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	libxml2-utils
+BuildRequires:  meson
+BuildRequires:  gtk-doc
 Requires:	gvfs-obexftp
 Requires:	bluez
 Requires:	obexd
@@ -77,16 +79,16 @@ Development files and header files from %{name}.
 %setup -q
 
 %build
-%configure \
-	--enable-shared \
-	--disable-static \
-	--disable-desktop-update \
-	--disable-icon-update \
-	--disable-schemas-compile
+%meson          \
+	-Denable-gtk-doc=true
+	
+%meson_build
+
+	
 %make
 
 %install
-%makeinstall_std
+%meson_install
 
 mkdir -p %{buildroot}%{_udevrulesdir}
 install %{SOURCE1} %{buildroot}%{_udevrulesdir}/
