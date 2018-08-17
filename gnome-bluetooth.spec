@@ -11,8 +11,8 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version: 	3.18.1
-Release: 	2
+Version: 	3.28.2
+Release: 	1
 Epoch:		1
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
@@ -36,6 +36,8 @@ BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	intltool
 BuildRequires:	itstool
 BuildRequires:	libxml2-utils
+BuildRequires:  meson
+BuildRequires:  gtk-doc
 Requires:	gvfs-obexftp
 Requires:	bluez
 Requires:	obexd
@@ -77,16 +79,13 @@ Development files and header files from %{name}.
 %setup -q
 
 %build
-%configure \
-	--enable-shared \
-	--disable-static \
-	--disable-desktop-update \
-	--disable-icon-update \
-	--disable-schemas-compile
-%make
+%meson          \
+	-Denable-gtk-doc=true
+	
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 
 mkdir -p %{buildroot}%{_udevrulesdir}
 install %{SOURCE1} %{buildroot}%{_udevrulesdir}/
@@ -112,7 +111,7 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gi_major}.typelib
 
 %files -n %{develname}
-%doc %{_datadir}/gtk-doc/html/%{name}
+#doc %{_datadir}/gtk-doc/html/%{name}
 %{_includedir}/%{name}
 %{_libdir}/lib%{name}.so
 %{_datadir}/gir-1.0/GnomeBluetooth-%{gi_major}.gir
