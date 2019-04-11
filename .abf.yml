@@ -1,10 +1,2 @@
-removed_sources:
-  gnome-bluetooth-3.14.0.tar.xz: 2a978c4b35bbbe3e4f5a932b0198c57610d782ef
-  gnome-bluetooth-3.16.1.tar.xz: 4c272eff57c88715f1a3831b32de1946606aa82e
-  gnome-bluetooth-3.18.0.tar.xz: 235d19e407e26037b9460ececb3fcf390d2a112a
-  gnome-bluetooth-3.6.1.tar.xz: 2248c0b0f575782ba4a7a50470a6ce517debaf0f
-  gnome-bluetooth-3.8.1.tar.xz: c3c5521ba4e5428ee6d30fa3c049bcf7a7c0f345
-  gnome-bluetooth-3.18.1.tar.xz: f175d65c5b092aa7c1342ea1703856e083c42699
-  
 sources:
-  gnome-bluetooth-3.28.2.tar.xz:  43721092a3856ec5b77d836006b600010a7532a8
+  gnome-bluetooth-3.32.0.tar.xz: e0b82ec80953b247828a6b6c802ce7bdf079e8e5
