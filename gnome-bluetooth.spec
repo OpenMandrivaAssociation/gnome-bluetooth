@@ -11,8 +11,8 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version:	3.34.1
-Release:	2
+Version:	3.34.2
+Release:	1
 Epoch:		1
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
@@ -96,7 +96,7 @@ install %{SOURCE1} %{buildroot}%{_udevrulesdir}/
 find %{buildroot} -name "*.la" -exec rm -rf {} \;
 
 %files -f %{name}2.lang
-%doc README AUTHORS
+%doc README.md AUTHORS
 %{_udevrulesdir}/61-gnome-bluetooth-rfkill.rules
 %{_bindir}/*
 %{_datadir}/applications/bluetooth-sendto.desktop
