@@ -11,7 +11,7 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version:	3.34.3
+Version:	3.34.5
 Release:	1
 Epoch:		1
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
@@ -31,6 +31,7 @@ BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	pkgconfig(libcanberra-gtk3)
+BuildRequires:	python3dist(python-dbusmock)
 BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	intltool
