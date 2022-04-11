@@ -34,6 +34,7 @@ BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	pkgconfig(libadwaita-1)
 BuildRequires:	pkgconfig(libcanberra-gtk3)
+BuildRequires:	pkgconfig(upower-glib)
 BuildRequires:	python3dist(python-dbusmock)
 BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 0.9.5
