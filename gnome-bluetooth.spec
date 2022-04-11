@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.29.90
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(gmodule-export-2.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
-#BuildRequires:	pkgconfig(gtk4)
+BuildRequires:	pkgconfig(gtk4)
 BuildRequires:	pkgconfig(libnotify) >= 0.7.0
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(x11)
