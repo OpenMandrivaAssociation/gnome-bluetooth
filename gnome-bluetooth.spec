@@ -32,6 +32,7 @@ BuildRequires:	pkgconfig(libnotify) >= 0.7.0
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xi)
+BuildRequires:	pkgconfig(libadwaita-1)
 BuildRequires:	pkgconfig(libcanberra-gtk3)
 BuildRequires:	python3dist(python-dbusmock)
 BuildRequires:	gnome-common
