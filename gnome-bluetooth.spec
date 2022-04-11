@@ -82,7 +82,7 @@ Development files and header files from %{name}.
 
 %build
 %meson          \
-	-Denable-gtk-doc=true
+	-Dgtk_doc=true
 	
 %meson_build
 
