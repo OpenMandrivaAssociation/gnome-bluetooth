@@ -105,9 +105,9 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 %{_udevrulesdir}/61-gnome-bluetooth-rfkill.rules
 %{_bindir}/*
 %{_datadir}/applications/bluetooth-sendto.desktop
-%{_datadir}/%{name}
+#{_datadir}/%{name}
 %{_mandir}/man1/*
-%{_datadir}/icons/hicolor/*/*/*.*
+#{_datadir}/icons/hicolor/*/*/*.*
 
 %files -n %{libname}
 %{_libdir}/lib%{name}.so.%{major}*
