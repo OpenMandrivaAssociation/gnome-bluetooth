@@ -1,9 +1,13 @@
 %define major		13
-%define gi_major	1.0
+%define gi_major	3.0
+%define	api		3
 
-%define libname		%mklibname %{name} %{major}
-%define develname	%mklibname -d %{name}
-%define girname		%mklibname %{name}-gir %{gi_major}
+# Let's add compact package g-bluetooth with version 3.34.X (gtk3) to allow works other non gmome packages like blueberry/
+# That's why we need add also new api to file name to avoid conflicting.
+
+%define libname		%mklibname %{name} %{api} %{major}
+%define develname	%mklibname -d %{name} %{api}
+%define girname		%mklibname %{name}-gir %{api} %{gi_major}
 
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define _disable_ld_no_undefined 1
@@ -95,22 +99,22 @@ Development files and header files from %{name}.
 mkdir -p %{buildroot}%{_udevrulesdir}
 install %{SOURCE1} %{buildroot}%{_udevrulesdir}/
 
-%find_lang %{name}2 --all-name --with-gnome
+%find_lang %{name}-%{gi_major} --all-name --with-gnome
 
 # Remove .la files
 find %{buildroot} -name "*.la" -exec rm -rf {} \;
 
-%files -f %{name}2.lang
+%files -f %{name}-%{gi_major}.lang
 %doc README.md AUTHORS
 %{_udevrulesdir}/61-gnome-bluetooth-rfkill.rules
 %{_bindir}/*
 %{_datadir}/applications/bluetooth-sendto.desktop
-#{_datadir}/%{name}
 %{_mandir}/man1/*
+%{_datadir}/gnome-bluetooth-%{gi_major}/
 #{_datadir}/icons/hicolor/*/*/*.*
 
 %files -n %{libname}
-%{_libdir}/lib%{name}.so.%{major}*
+%{_libdir}/lib%{name}-%{gi_major}.so.%{major}*
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gi_major}.typelib
@@ -118,7 +122,9 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 %files -n %{develname}
 #doc %{_datadir}/gtk-doc/html/%{name}
 %{_includedir}/%{name}
-%{_libdir}/lib%{name}.so
+%{_libdir}/lib%{name}-%{gi_major}.so
+%{_libdir}/libgnome-bluetooth-ui-%{gi_major}.so
+%{_libdir}/pkgconfig/gnome-bluetooth-%{gi_major}.pc
+%{_libdir}/pkgconfig/gnome-bluetooth-ui-%{gi_major}.pc
 %{_datadir}/gir-1.0/GnomeBluetooth-%{gi_major}.gir
-%{_libdir}/pkgconfig/*.pc
 
