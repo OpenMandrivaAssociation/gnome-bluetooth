@@ -1,9 +1,13 @@
 %define major		13
-%define gi_major	1.0
+%define gi_major	3.0
+%define	api		3
 
-%define libname		%mklibname %{name} %{major}
-%define develname	%mklibname -d %{name}
-%define girname		%mklibname %{name}-gir %{gi_major}
+# Let's add compact package g-bluetooth with version 3.34.X (gtk3) to allow works other non gmome packages like blueberry/
+# That's why we need add also new api to file name to avoid conflicting.
+
+%define libname		%mklibname %{name} %{api} %{major}
+%define develname	%mklibname -d %{name} %{api}
+%define girname		%mklibname %{name}-gir %{api} %{gi_major}
 
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 %define _disable_ld_no_undefined 1
@@ -11,8 +15,8 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version:	3.34.5
-Release:	2
+Version:	42.0
+Release:	1
 Epoch:		1
 Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
@@ -25,12 +29,16 @@ BuildRequires:	pkgconfig(gio-unix-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.29.90
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(gmodule-export-2.0)
+BuildRequires:	pkgconfig(gsound)
 BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(gtk4)
 BuildRequires:	pkgconfig(libnotify) >= 0.7.0
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xi)
+BuildRequires:	pkgconfig(libadwaita-1)
 BuildRequires:	pkgconfig(libcanberra-gtk3)
+BuildRequires:	pkgconfig(upower-glib)
 BuildRequires:	python3dist(python-dbusmock)
 BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 0.9.5
@@ -81,7 +89,7 @@ Development files and header files from %{name}.
 
 %build
 %meson          \
-	-Denable-gtk-doc=true
+	-Dgtk_doc=true
 	
 %meson_build
 
@@ -91,30 +99,33 @@ Development files and header files from %{name}.
 mkdir -p %{buildroot}%{_udevrulesdir}
 install %{SOURCE1} %{buildroot}%{_udevrulesdir}/
 
-%find_lang %{name}2 --all-name --with-gnome
+%find_lang %{name}-%{gi_major} --all-name --with-gnome
 
 # Remove .la files
 find %{buildroot} -name "*.la" -exec rm -rf {} \;
 
-%files -f %{name}2.lang
+%files -f %{name}-%{gi_major}.lang
 %doc README.md AUTHORS
 %{_udevrulesdir}/61-gnome-bluetooth-rfkill.rules
 %{_bindir}/*
 %{_datadir}/applications/bluetooth-sendto.desktop
-%{_datadir}/%{name}
 %{_mandir}/man1/*
-%{_datadir}/icons/hicolor/*/*/*.*
+%{_datadir}/gnome-bluetooth-%{gi_major}/
+#{_datadir}/icons/hicolor/*/*/*.*
 
 %files -n %{libname}
-%{_libdir}/lib%{name}.so.%{major}*
+%{_libdir}/lib%{name}-%{gi_major}.so.%{major}*
+%{_libdir}/libgnome-bluetooth-ui-%{gi_major}.so.%{major}*
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gi_major}.typelib
 
 %files -n %{develname}
-#doc %{_datadir}/gtk-doc/html/%{name}
-%{_includedir}/%{name}
-%{_libdir}/lib%{name}.so
+%doc %{_datadir}/gtk-doc/html/gnome-bluetooth-%{gi_major}/
+%{_includedir}/gnome-bluetooth-%{gi_major}/
+%{_libdir}/lib%{name}-%{gi_major}.so
+%{_libdir}/libgnome-bluetooth-ui-%{gi_major}.so
+%{_libdir}/pkgconfig/gnome-bluetooth-%{gi_major}.pc
+%{_libdir}/pkgconfig/gnome-bluetooth-ui-%{gi_major}.pc
 %{_datadir}/gir-1.0/GnomeBluetooth-%{gi_major}.gir
-%{_libdir}/pkgconfig/*.pc
 
