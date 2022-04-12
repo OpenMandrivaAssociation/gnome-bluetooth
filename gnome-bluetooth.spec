@@ -115,12 +115,13 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 
 %files -n %{libname}
 %{_libdir}/lib%{name}-%{gi_major}.so.%{major}*
+%{_libdir}/libgnome-bluetooth-ui-%{gi_major}.so.%{major}*
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/GnomeBluetooth-%{gi_major}.typelib
 
 %files -n %{develname}
-#doc %{_datadir}/gtk-doc/html/%{name}
+%doc %{_datadir}/gtk-doc/html/gnome-bluetooth-%{gi_major}/
 %{_includedir}/gnome-bluetooth-%{gi_major}/
 %{_libdir}/lib%{name}-%{gi_major}.so
 %{_libdir}/libgnome-bluetooth-ui-%{gi_major}.so
