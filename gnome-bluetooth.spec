@@ -15,10 +15,10 @@
 
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
-Version:	42.3
+Version:	42.4
 Release:	1
 Epoch:		1
-Source0:	http://download.gnome.org/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
+Source0:	http://download.gnome.org/sources/gnome-bluetooth/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
 URL:		http://usefulinc.com/software/gnome-bluetooth/
 #gw lib is LGPL, main app is GPL
