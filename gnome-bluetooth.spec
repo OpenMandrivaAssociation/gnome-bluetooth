@@ -88,8 +88,9 @@ Development files and header files from %{name}.
 %setup -q
 
 %build
-%meson          \
-	-Dgtk_doc=true
+%meson      \
+			-Dgtk_doc=true \
+   			-Dtests=false
 	
 %meson_build
 
