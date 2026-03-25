@@ -16,7 +16,7 @@
 Name: 	 	gnome-bluetooth
 Summary: 	GNOME Bluetooth Subsystem
 Version:	47.1
-Release:	3
+Release:	4
 Epoch:		1
 Source0:	https://download.gnome.org/sources/gnome-bluetooth/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
@@ -44,7 +44,7 @@ BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	intltool
 BuildRequires:	itstool
-BuildRequires:	libxml2-utils
+BuildRequires:	libxml2-utils >= 2.15.2
 BuildRequires:  meson
 BuildRequires:  gtk-doc
 Requires:	gvfs-obexftp
