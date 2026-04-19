@@ -89,7 +89,6 @@ Development files and header files from %{name}.
 
 %build
 %meson      \
-			-Dtests=false \
 			-Dgtk_doc=true
 	
 %meson_build
